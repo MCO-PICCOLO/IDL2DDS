@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  dds-sender:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - CYCLONEDDS_URI=file:///app/cyclonedds-sender/cyclonedds.xml
+    volumes:
+      - ./cyclonedds.xml:/app/cyclonedds-sender/cyclonedds.xml
+    network_mode: "host"
+    # Uncomment to keep the container running even if the process exits
+    # tty: true
+    # stdin_open: true
+
+# Network section removed as we're using host network

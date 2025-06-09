@@ -1,3 +1,4 @@
+@final
 struct ADASObstacleDetectionIsWarning {
 	// datatype: boolean
 	// type: actuator

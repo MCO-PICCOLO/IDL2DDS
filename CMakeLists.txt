@@ -63,6 +63,7 @@ file(GLOB SOURCES
     src/*.cpp
     src/*.c
     src/topic/*.c
+    src/handlers/*.cpp
 )
 
 add_executable(IDL2DDS

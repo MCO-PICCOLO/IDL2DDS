@@ -1,3 +1,4 @@
+@final
 struct BodyLightsHeadLampStatus {
     // type: sensor
     // command : 0 = OFF, 1 = ON

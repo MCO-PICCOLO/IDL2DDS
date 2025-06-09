@@ -10,6 +10,8 @@ services:
     volumes:
       - ./cyclonedds.xml:/app/IDL2DDS/cyclonedds.xml
       - ./test-cases:/app/IDL2DDS/test-cases
+      # Mount src/topic to allow adding new IDL files without rebuilding
+      - ./src/topic:/app/IDL2DDS/src/topic
     network_mode: "host"
     command: ["/app/IDL2DDS/build/IDL2DDS", "/app/IDL2DDS/test-cases/test-message.yaml"]
     # Uncomment to keep the container running even if the process exits

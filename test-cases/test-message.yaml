@@ -29,6 +29,28 @@ HeadLampStatus:
       highBeamOn: false
     # Will cycle through these states
 
+VehicleStatus:
+  start_time: 1        # Start 1 second after test begins
+  end_time: 120        # Run for 120 seconds
+  frequency: 2         # Hz (2 messages per second)
+  data:
+    - speed: 0
+      rpm: 800
+      fuelLevel: 75.5
+      engineOn: true
+      gear: 0          # Park
+    - speed: 25
+      rpm: 1500
+      fuelLevel: 75.0
+      engineOn: true
+      gear: 4          # D2 (Drive 2)
+    - speed: 10
+      rpm: 1200
+      fuelLevel: 74.3
+      engineOn: true
+      gear: 3          # D1 (Drive 1)
+    # Will cycle through these states to simulate driving
+
 VehicleSpeed:
   start_time: 0
   end_time: 0          # 0 means run indefinitely

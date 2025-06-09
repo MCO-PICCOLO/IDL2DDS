@@ -1,0 +1,10 @@
+// New IDL file template with extensibility annotation
+@final
+struct {{TYPE_NAME}} {
+    // TODO: Define your data fields here
+    // Examples:
+    // long field1;
+    // boolean field2;
+    // string<128> field3;
+    // float field4;
+};

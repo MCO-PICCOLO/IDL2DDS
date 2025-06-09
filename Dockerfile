@@ -39,9 +39,23 @@ COPY src/ /app/IDL2DDS/src/
 COPY include/ /app/IDL2DDS/include/
 COPY test-cases/ /app/IDL2DDS/test-cases/
 COPY cyclonedds.xml /app/IDL2DDS/
+COPY generate_handler.sh /app/IDL2DDS/
+COPY ensure_newlines.sh /app/IDL2DDS/
+COPY auto_generate_handlers.sh /app/IDL2DDS/
+
+# Make scripts executable
+WORKDIR /app/IDL2DDS
+RUN chmod +x generate_handler.sh ensure_newlines.sh auto_generate_handlers.sh
+
+# Fix newlines in IDL files and auto-generate handlers for new IDL files
+RUN ./ensure_newlines.sh
+RUN ./auto_generate_handlers.sh
+
+# Ensure the proper system environment is set up
+ENV PATH=/usr/local/cyclonedds/bin:$PATH
+ENV LD_LIBRARY_PATH=/usr/local/cyclonedds/lib:$LD_LIBRARY_PATH
 
 # Build the application
-WORKDIR /app/IDL2DDS
 RUN mkdir -p build && \
     cd build && \
     cmake .. -DCYCLONEDDS_HOME=/usr/local/cyclonedds && \

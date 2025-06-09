@@ -62,6 +62,19 @@ build_with_docker() {
 build_local() {
     echo "Building locally..."
     
+    # Run scripts to ensure newlines and generate handlers
+    if [ -f "./ensure_newlines.sh" ]; then
+        echo "Fixing newlines in IDL files..."
+        chmod +x ./ensure_newlines.sh
+        ./ensure_newlines.sh
+    fi
+    
+    if [ -f "./auto_generate_handlers.sh" ]; then
+        echo "Auto-generating handlers for IDL files..."
+        chmod +x ./auto_generate_handlers.sh
+        ./auto_generate_handlers.sh
+    fi
+    
     # Create build directory if it doesn't exist
     mkdir -p build
     

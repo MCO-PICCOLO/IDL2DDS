@@ -1,16 +1,12 @@
 #ifndef TOPIC_PUBLISHER_H
 #define TOPIC_PUBLISHER_H
 
-#include "common_types.h"
 #include "ADASObstacleDetection.h" // Generated from IDL
+#include <string>
 
-// Function to initialize the DDS topic publisher
-void init_dds(const char *topic_name);
-
-// Function to publish a message on the topic
+// C++ API로 변환된 함수들
+void init_dds(const std::string& topic_name);
 void publish_message(const ADASObstacleDetectionIsWarning *data);
-
-// Function to clean up DDS resources
-void cleanup_dds(void);
+void cleanup_dds();
 
 #endif // TOPIC_PUBLISHER_H

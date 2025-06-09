@@ -6,10 +6,12 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - CYCLONEDDS_URI=file:///app/cyclonedds-sender/cyclonedds.xml
+      - CYCLONEDDS_URI=file:///app/IDL2DDS/cyclonedds.xml
     volumes:
-      - ./cyclonedds.xml:/app/cyclonedds-sender/cyclonedds.xml
+      - ./cyclonedds.xml:/app/IDL2DDS/cyclonedds.xml
+      - ./test-cases:/app/IDL2DDS/test-cases
     network_mode: "host"
+    command: ["/app/IDL2DDS/build/IDL2DDS", "/app/IDL2DDS/test-cases/test-message.yaml"]
     # Uncomment to keep the container running even if the process exits
     # tty: true
     # stdin_open: true

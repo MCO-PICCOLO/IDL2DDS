@@ -1,0 +1,61 @@
+# DDS Test Configuration
+version: 1.0
+
+# Each topic is a top-level key
+ADASObstacleDetectionIsWarning:
+  start_time: 0        # seconds after test start
+  end_time: 60         # seconds after test start (0 for indefinite)
+  frequency: 2         # Hz (2 messages per second)
+  data:
+    - value: true
+    - value: false
+    - value: true
+    - value: false
+    # Will cycle through these values in sequence
+
+HeadLampStatus:
+  start_time: 2        # Start 2 seconds after test begins
+  end_time: 120        # Run for 120 seconds
+  frequency: 1         # Hz (1 message per second)
+  data:
+    - leftLampOn: true
+      rightLampOn: true
+      highBeamOn: false
+    - leftLampOn: true
+      rightLampOn: true
+      highBeamOn: true
+    - leftLampOn: false
+      rightLampOn: false
+      highBeamOn: false
+    # Will cycle through these states
+
+VehicleSpeed:
+  start_time: 0
+  end_time: 0          # 0 means run indefinitely
+  frequency: 10        # Hz (10 messages per second)
+  data:
+    - value: 0
+    - value: 20
+    - value: 50
+    - value: 70
+    - value: 30
+    - value: 0
+    # Simulates acceleration and deceleration
+
+EngineStatus:
+  start_time: 5
+  end_time: 90
+  frequency: 0.5       # Hz (1 message every 2 seconds)
+  data:
+    - running: true
+      rpm: 800
+      temperature: 80
+    - running: true
+      rpm: 2000
+      temperature: 85
+    - running: true
+      rpm: 3000
+      temperature: 90
+    - running: true
+      rpm: 1000
+      temperature: 88

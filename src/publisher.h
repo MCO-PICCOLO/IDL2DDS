@@ -2,19 +2,15 @@
 #define PUBLISHER_H
 
 #include <dds/dds.h>
-#include <stdbool.h>
-#include "common_types.h"
+#include <string>
+#include <yaml-cpp/yaml.h>
 
-// Function to initialize the DDS publisher
-int publisher_init(const char *topic_name);
+// C++ API로 변환
+bool initialize_dds(); // DDS 시스템 초기화
+void cleanup_dds(); // DDS 시스템 정리
 
-// Function to publish obstacle detection warning message
-void publisher_publish_obstacle_detection(bool warning_enabled);
-
-// Function to clean up the publisher resources
-void publisher_fini(void);
-
-// Function to run the publisher in a loop (for main.c)
-int publisher_run(void);
+// C++ YAML 기반 publishing 함수들
+bool initialize_dds_publisher(const std::string& topic_name);
+bool publish_data(const std::string& topic_name, const YAML::Node& data_node, int data_index);
 
 #endif // PUBLISHER_H

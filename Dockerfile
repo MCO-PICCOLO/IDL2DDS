@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     maven \
     default-jdk \
     libssl-dev \
+    libyaml-cpp-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
@@ -30,20 +31,21 @@ ENV PATH=/usr/local/cyclonedds/bin:$PATH
 ENV LD_LIBRARY_PATH=/usr/local/cyclonedds/lib
 
 # Create application directory
-RUN mkdir -p /app/cyclonedds-sender
+RUN mkdir -p /app/IDL2DDS
 
 # Copy the application source (excluding any build artifacts)
-COPY CMakeLists.txt /app/cyclonedds-sender/
-COPY src/ /app/cyclonedds-sender/src/
-COPY include/ /app/cyclonedds-sender/include/
-COPY cyclonedds.xml /app/cyclonedds-sender/
+COPY CMakeLists.txt /app/IDL2DDS/
+COPY src/ /app/IDL2DDS/src/
+COPY include/ /app/IDL2DDS/include/
+COPY test-cases/ /app/IDL2DDS/test-cases/
+COPY cyclonedds.xml /app/IDL2DDS/
 
 # Build the application
-WORKDIR /app/cyclonedds-sender
+WORKDIR /app/IDL2DDS
 RUN mkdir -p build && \
     cd build && \
     cmake .. -DCYCLONEDDS_HOME=/usr/local/cyclonedds && \
-    cmake --build .
+    make -j4
 
-# Run the application
-CMD ["/app/cyclonedds-sender/build/cyclonedds_sender"]
+# Set default command
+CMD ["/app/IDL2DDS/build/IDL2DDS", "/app/IDL2DDS/test-cases/test-message.yaml"]
